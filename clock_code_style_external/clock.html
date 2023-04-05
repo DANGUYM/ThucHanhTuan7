@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock_code_style_external</title>
+</head>
+
+<style>
+    #clock {
+        font-size: 50px;
+        text-align: center;
+        margin: 100px auto;
+    }
+    
+    .time {
+        display: inline-block;
+        min-width: 80px;
+        text-align: center;
+        border-radius: 10px;
+        background-color: rgb(145, 57, 57);
+        color: #c5daad;
+        margin: 0 10px;
+        padding: 10px;
+    }
+    
+    .doubleDot {
+        display: inline-block;
+        font-size: 60px;
+        line-height: 60px;
+    }
+</style>
+
+<script>
+    function Clock() {
+        // get current day
+        var date = new Date();
+
+        // set h, m ,s
+        var currentHours = date.getHours();
+        var currentMinutes = date.getMinutes();
+        var currentSeconds = date.getSeconds();
+
+        // set clock
+        var ampm = currentHours < 12 ? "AM" : "PM";
+        currentHours = currentHours > 12 ? currentHours - 12 : currentHours;
+        currentHours = currentHours == 0 ? 12 : currentHours;
+        currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+        currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+
+        // innerHTML
+        document.getElementById("hours").innerHTML = currentHours;
+        document.getElementById("minutes").innerHTML = currentMinutes;
+        document.getElementById("seconds").innerHTML = currentSeconds;
+        document.getElementById("ampm").innerHTML = ampm;
+
+    }
+    setInterval(Clock, 1000);
+</script>
+
+<body>
+    <div id="clock">
+        <div id="hours" class="time"></div>
+        <div class="doubleDot">:</div>
+        <div id="minutes" class="time"></div>
+        <div class="doubleDot">:</div>
+        <div id="seconds" class="time"></div>
+        <div class="doubleDot">:</div>
+        <div id="ampm" class="time" style="background-color: black;"></div>
+    </div>
+</body>
+
+</html>
