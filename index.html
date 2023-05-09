@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>clock_code_style_external</title>
+    <title>clock_code_style_internal</title>
 </head>
 
 <style>
@@ -34,27 +34,27 @@
 </style>
 
 <script>
-    var is24HourFormat = true; // Default is 24-hour format
-
     function Clock() {
         // get current day
         var date = new Date();
 
-        // set h, m ,s
+        // set h, m ,s, ampm
         var currentHours = date.getHours();
         var currentMinutes = date.getMinutes();
         var currentSeconds = date.getSeconds();
+        var ampm = currentHours < 12 ? "AM" : "PM";
 
-        // Set clock format
-        if (!is24HourFormat) {
-            var ampm = "";
-            currentHours = currentHours.toString().padStart(2, '0');
-        } else {
-            var ampm = currentHours < 12 ? "AM" : "PM";
-            currentHours = (currentHours % 12 || 12).toString().padStart(2, '0');
-        }
+        /*
+        // set clock, no padStart for beginners
+        var ampm = currentHours < 12 ? "AM" : "PM";
+        currentHours = currentHours > 12 ? currentHours - 12 : currentHours;
+        currentHours = currentHours == 0 ? 12 : currentHours;
+        currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+        currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+        */
 
-        // Set minutes and seconds
+        // set clock
+        currentHours = currentHours.toString().padStart(2, '0');
         currentMinutes = currentMinutes.toString().padStart(2, '0');
         currentSeconds = currentSeconds.toString().padStart(2, '0');
 
@@ -63,10 +63,6 @@
         document.getElementById("minutes").innerHTML = currentMinutes;
         document.getElementById("seconds").innerHTML = currentSeconds;
         document.getElementById("ampm").innerHTML = ampm;
-    }
-
-    function toggleClockFormat() {
-        is24HourFormat = !is24HourFormat;
     }
 
     setInterval(Clock, 1000);
@@ -79,10 +75,8 @@
         <div id="minutes" class="time"></div>
         <div class="doubleDot">:</div>
         <div id="seconds" class="time"></div>
-    </div>
-    <div id="clock">
+        <div class="doubleDot">:</div>
         <div id="ampm" class="time" style="background-color: black;"></div>
-        <div class="time" onclick="toggleClockFormat()">Toggle Format</div>
     </div>
 </body>
 
