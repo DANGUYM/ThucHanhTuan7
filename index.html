@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>clock_code_style_external</title>
+    <title>clock_code_style_internal</title>
 </head>
 
 <style>
@@ -43,12 +43,21 @@
         var currentMinutes = date.getMinutes();
         var currentSeconds = date.getSeconds();
 
+        /*
+                // set clock, no padStart for beginners
+                var ampm = currentHours < 12 ? "AM" : "PM";
+                currentHours = currentHours > 12 ? currentHours - 12 : currentHours;
+                currentHours = currentHours == 0 ? 12 : currentHours;
+                currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+                currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+        */
+
         // set clock
         var ampm = currentHours < 12 ? "AM" : "PM";
-        currentHours = currentHours > 12 ? currentHours - 12 : currentHours;
-        currentHours = currentHours == 0 ? 12 : currentHours;
-        currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
-        currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+        currentHours = (currentHours % 12 || 12).toString().padStart(2, '0');
+        currentMinutes = currentMinutes.toString().padStart(2, '0');
+        currentSeconds = currentSeconds.toString().padStart(2, '0');
+
 
         // innerHTML
         document.getElementById("hours").innerHTML = currentHours;
